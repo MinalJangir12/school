@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My School</title>
+  <style>
+    body {
+      background: linear-gradient(120deg, #e0e7ef 0%, #f5f7fa 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      background: #2d3e50;
+      padding: 1.2rem 2rem;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(45,62,80,0.08);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.4em 1em;
+      border-radius: 2em;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a.active, nav a:hover {
+      background: #fff;
+      color: #2d3e50;
+    }
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 2.5rem 2rem;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 24px rgba(45,62,80,0.10);
+    }
+    section {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      color: #2d3e50;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+    p {
+      color: #4b6584;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    /* Education Levels */
+    #education {
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(80,120,200,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    #education ul {
+      margin: 1rem 0 0 1.5rem;
+      color: #2d3e50;
+      font-size: 1.08rem;
+    }
+    #education li {
+      margin-bottom: 0.5rem;
+    }
+    /* About */
+    #about {
+      background: linear-gradient(120deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(80,120,200,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    #about h3 {
+      color: #4b6584;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    /* Rules */
+    #rules {
+      background: linear-gradient(120deg, #e0eafc 0%, #f5f7fa 100%);
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(80,120,200,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    #rules ul {
+      margin: 1rem 0 0 1.5rem;
+      color: #2d3e50;
+      font-size: 1.08rem;
+    }
+    #rules li {
+      margin-bottom: 0.5rem;
+    }
+    /* Apply */
+    #apply {
+      background: linear-gradient(120deg, #c3cfe2 0%, #e0eafc 100%);
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(80,120,200,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    #apply form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 400px;
+    }
+    #apply input, #apply textarea {
+      padding: 0.7em;
+      border: 1px solid #b0b8c1;
+      border-radius: 0.5em;
+      font-size: 1rem;
+      background: #f5f7fa;
+    }
+    #apply button {
+      background: #2d3e50;
+      color: #fff;
+      border: none;
+      border-radius: 2em;
+      padding: 0.6em 1.5em;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    #apply button:hover {
+      background: #4b6584;
+      transform: translateY(-2px) scale(1.04);
+    }
+    /* Contact */
+    #contact {
+      background: linear-gradient(120deg, #f5f7fa 0%, #e0eafc 100%);
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(80,120,200,0.08);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    #contact .contact-info {
+      margin-bottom: 1.2rem;
+    }
+    #contact a {
+      color: #2d3e50;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    #contact a:hover {
+      color: #4b6584;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 1rem 0.5rem;
+      }
+      nav {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 1rem 0.5rem;
+      }
+      section, #education, #about, #rules, #apply, #contact {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#" class="active" onclick="showSection('home', this)">Home</a>
+    <a href="#" onclick="showSection('education', this)">Education Levels</a>
+    <a href="#" onclick="showSection('about', this)">About</a>
+    <a href="#" onclick="showSection('rules', this)">Rules</a>
+    <a href="#" onclick="showSection('apply', this)">Apply</a>
+    <a href="#" onclick="showSection('contact', this)">Contact</a>
+  </nav>
+  <main>
+    <section id="home" class="active">
+      <h2>Christian Liberty Academy</h2>
+    <p>Christian Liberty Academy is a private Christian school committed to providing a Bible-centered education that fosters academic excellence and spiritual growth. Located in Paramaribo, Suriname, it serves students from preschool through 12th grade.</p>
+    <img src="/practive project/images/CLA.png" alt="CLA" style="display:block; margin:2.5rem auto; max-width:600px; width:100%; border-radius:1rem; box-shadow:0 2px 12px rgba(80,120,200,0.10);">
+    <div class="social-icons" style="display:flex; justify-content:center; gap:1.2rem; margin-top:1.2rem;">
+      <a href="#" title="Facebook" style="color:#4267B2; font-size:2rem;"><i class="fab fa-facebook-f"></i></a>
+      <a href="mailto:info@cla.edu" title="Email" style="color:#2d3e50; font-size:2rem;"><i class="fas fa-envelope"></i></a>
+      <button type="button" onclick="showSection('about', document.querySelector('nav a[onclick*=about]'))" style="background:#4b6584; color:#fff; border:none; border-radius:2em; padding:0.5em 1.2em; font-size:1rem; font-weight:600; cursor:pointer;">Know us!</button>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    </section>
+    <section id="education">
+      <h2>Education Levels</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between;">
+       
+        <div style="flex: 1 1 200px; min-width: 220px; background: #e0eafc; border-radius: 1em; box-shadow: 0 2px 8px rgba(80,120,200,0.07); padding: 1.5em; margin-bottom: 1.5em;">
+          <div style="display: flex; align-items: center; margin-bottom: 1em;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:2.5em; height:2.5em; background:#4b6584; color:#fff; border-radius:50%; font-size:1.4em; margin-right:1em;">
+              <i class="fas fa-child"></i>
+            </span>
+            <span style="font-size:1.2em; font-weight:600;">Preschool</span>
+          </div>
+          <p style="color:#4b6584;">Our Preschool program introduces young children to a nurturing, faith-based environment where they learn foundational skills through play, stories, and creative activities.</p>
+        </div>
+        
+        <div style="flex: 1 1 200px; min-width: 220px; background: #cfdef3; border-radius: 1em; box-shadow: 0 2px 8px rgba(80,120,200,0.07); padding: 1.5em; margin-bottom: 1.5em;">
+          <div style="display: flex; align-items: center; margin-bottom: 1em;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:2.5em; height:2.5em; background:#3867d6; color:#fff; border-radius:50%; font-size:1.4em; margin-right:1em;">
+              <i class="fas fa-book-open"></i>
+            </span>
+            <span style="font-size:1.2em; font-weight:600;">Elementary School</span>
+          </div>
+          <p style="color:#4b6584;">Elementary students build strong academic foundations in reading, math, science, and social studies, all taught from a Christian worldview with an emphasis on character development.</p>
+        </div>
+        
+        <div style="flex: 1 1 200px; min-width: 220px; background: #e0eafc; border-radius: 1em; box-shadow: 0 2px 8px rgba(80,120,200,0.07); padding: 1.5em; margin-bottom: 1.5em;">
+          <div style="display: flex; align-items: center; margin-bottom: 1em;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:2.5em; height:2.5em; background:#20bf6b; color:#fff; border-radius:50%; font-size:1.4em; margin-right:1em;">
+              <i class="fas fa-user-graduate"></i>
+            </span>
+            <span style="font-size:1.2em; font-weight:600;">Middle School</span>
+          </div>
+          <p style="color:#4b6584;">Our Middle School program encourages critical thinking, teamwork, and leadership, preparing students for the academic and social challenges of high school.</p>
+        </div>
+      
+        <div style="flex: 1 1 200px; min-width: 220px; background: #cfdef3; border-radius: 1em; box-shadow: 0 2px 8px rgba(80,120,200,0.07); padding: 1.5em; margin-bottom: 1.5em;">
+          <div style="display: flex; align-items: center; margin-bottom: 1em;">
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:2.5em; height:2.5em; background:#fd9644; color:#fff; border-radius:50%; font-size:1.4em; margin-right:1em;">
+              <i class="fas fa-university"></i>
+            </span>
+            <span style="font-size:1.2em; font-weight:600;">High School</span>
+          </div>
+          <p style="color:#4b6584;">High School students engage in a rigorous curriculum that prepares them for college and life, with opportunities for leadership, service, and spiritual growth.</p>
+        </div>
+      </div>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    </section>
+    <section id="about">
+      <h2>About</h2>
+    <h3>
+        <div style="margin-bottom: 1.2em;">
+          Reformation Christian Ministries (RCM) began in 1979 when Rev. Geoffrey Donnan, along with his wife Nancy and their children, established a church and Christian school in Suriname. Initially planning only a one-year mission, the Donnans responded to the growing interest in Bible studies among English-speaking workers, which led to the founding of Open Door Bible Church and later the Christian Liberty Academy (CLA) in October 1979 with just 16 students.
+        </div>
+
+        <div style="margin-bottom: 1.2em;">
+          In 1980, the ministry was formalized under Stichting Caribbean Christian Ministries. During that same year, Suriname experienced a military coup, and the church moved to the CLA property in Uitvlugt. Despite political instability, both the church and school expanded. When the Donnan family returned to the U.S. in 1986 for their children's education, local leaders continued the work under guidance from the U.S.
+        </div>
+
+        <div style="margin-bottom: 1.2em;">
+          Leadership was gradually passed on to individuals such as Mitchell Persaud and Asgar Mohamed Hamid, who had been students and staff members at CLA. They were mentored for administrative and pastoral roles. The Orthodox Presbyterian Church supported the church for some time until it transitioned to the Covenant Reformed Presbyterian Church in 1998.
+        </div>
+
+        <div style="margin-bottom: 1.2em;">
+          In 1994, Rev. Rudy Poettcker joined as a missionary and educator. He became pastor of First Presbyterian Church and later the headmaster of CLA. In 2002, he was succeeded as pastor by Rev. Asgar Hamid, who had completed theological studies through RCM.
+        </div>
+
+        <div style="margin-bottom: 1.2em;">
+          A major setback occurred in 2003 when a fire destroyed the main school and church building, including the residence above. However, the community rebuilt the facility by 2005, allowing operations to continue smoothly.
+        </div>
+
+        <div style="margin-bottom: 1.2em;">
+          Since 2006, Rev. Poettcker has been based in the U.S. but continues to serve as headmaster and field director, frequently traveling to Suriname. Today, both the church and school are thriving, self-sustaining institutions with strong local leadership and ongoing connections with RCM for educational and theological support.
+        </div>
+    </h3>
+
+    </h3>
+    </section>
+    <section id="rules">
+      <h2>Rules</h2>
+      <ol>
+        <li>Respect teachers, staff, and fellow students.</li>
+        <li>Attend classes regularly and be punctual.</li>
+        <li>Complete assignments on time.</li>
+        <li>Follow the school dress code.</li>
+        <li>Maintain academic integrity.</li>
+      </ol>
+
+      <h2>Fee</h2>
+      <p>Registration Fee: $100</p>
+      <p>Monthly Tuition: $200</p>    
+      <p>Annual Fee: $50</p>
+      <p>Note: Fees are subject to change. Please contact the school for the latest information.</p>
+    </section>
+    <section id="apply">
+      <h2>Apply</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea rows="4" placeholder="Your Qualification?"></textarea>
+        <button type="submit">Submit Application</button>
+      </form>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <p>Email: <a href="mailto:info@cla.edu">info@cla.edu</a></p>
+        <p>Phone: <a href="tel:+597123456">+597 123456</a></p>
+        <p>Address: 123 Main Street, Paramaribo, Suriname</p>
+      </div>
+    </section>
+  </main>
+  <script>
+    function showSection(sectionId, link) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  </script>
+</body>
+</html>
